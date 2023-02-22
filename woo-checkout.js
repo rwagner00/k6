@@ -59,26 +59,25 @@ export default function () {
         })
     }
 
-    const categories = group('Load homepage', function () {
-        const response = http.get(siteUrl, { jar })
+    // const categories = group('Load homepage', function () {
+    //     const response = http.get(siteUrl + "/shop", { jar })
+    //
+    //     check(response, isOK)
+    //         || (errorRate.add(1) && fail('status code was *not* 200'))
+    //
+    //     metrics.addResponseMetrics(response)
+    //     responseCacheRate.add(responseWasCached(response))
+    //
+    //     return response.html()
+    //         .find('li.product-category > a')
+    //         .map((idx, el) => String(el.attr('href')))
+    //         .filter(href => ! href.includes('/decor/')) // skip WP swag
+    // })
+    //
+    // sleep(rand(pause.min, pause.max))
 
-        check(response, isOK)
-            || (errorRate.add(1) && fail('status code was *not* 200'))
-
-        metrics.addResponseMetrics(response)
-        responseCacheRate.add(responseWasCached(response))
-
-        return response.html()
-            .find('li.product-category > a')
-            .map((idx, el) => String(el.attr('href')))
-            .filter(href => ! href.includes('/decor/')) // skip WP swag
-    })
-
-    sleep(rand(pause.min, pause.max))
-
-    const products = group('Load category', function () {
-        const category = sample(categories)
-        const response = http.get(category, { jar })
+    const products = group('Load shop page', function () {
+        const response = http.get(siteUrl + "/shop/page/" + rand(1,3), { jar })
 
         check(response, isOK)
             || (errorRate.add(1) && fail('status code was *not* 200'))
@@ -88,7 +87,7 @@ export default function () {
 
         return response.html()
             .find('.products')
-            .find('.product:not(.product-type-variable)') // skip variable products
+            .find('.product:not(.product-type-variable,.outofstock)') // skip variable products
             .find('.woocommerce-loop-product__link')
             .map((idx, el) => el.attr('href'))
     })

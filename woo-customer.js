@@ -114,8 +114,8 @@ export default function () {
 
     sleep(rand(pause.min, pause.max))
 
-    group('Load orders', function () {
-        const response = http.get(`${siteUrl}/my-account/orders/`, { jar })
+    group('View account details', function () {
+        const response = http.get(`${siteUrl}/my-account/edit-account/`, { jar })
 
         check(response, isOK)
             || (errorRate.add(1) && fail('status code was *not* 200'))

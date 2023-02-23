@@ -10,4 +10,7 @@ date -u
 
 k6 run woo-checkout.js  --vus="${VUS}" --duration="${DURATION}" --env SITE_URL=https://live-pasta-la-vista.pantheonsite.io/
 
+# TODO: Do we want different durations or vus for this one?
+k6 run woo-customer.js  --vus="${VUS}" --duration="${DURATION}" --env SITE_URL=https://live-pasta-la-vista.pantheonsite.io/
+
 date -u

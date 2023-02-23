@@ -4,6 +4,7 @@ import { check, group, fail, sleep } from 'k6'
 
 import { isOK, pageIsNotLogin } from './lib/checks.js'
 import { rand, validateSiteUrl, responseWasCached, bypassPageCacheCookies } from './lib/helpers.js'
+import Metrics from './lib/metrics.js'
 
 export const options = {
     throw: true,

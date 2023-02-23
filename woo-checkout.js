@@ -146,7 +146,7 @@ export default function () {
 
     sleep(rand(pause.min, pause.max))
 
-    group('Place holder', function () {
+    group('Place order', function () {
         const response = http.get(`${siteUrl}/checkout`, { jar })
 
         check(response, isOK)

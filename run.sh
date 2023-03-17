@@ -3,7 +3,7 @@ set -eou pipefail
 
 # Update these numbers for our first real test, then leave consistent for all test cases
 VUS=50
-DURATION=10m
+DURATION=15m
 
 while [[ $(date +%S) -gt 0 ]]
 do

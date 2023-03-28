@@ -2,12 +2,14 @@ import http from 'k6/http'
 import { Rate, Trend } from 'k6/metrics'
 import { check, group, fail, sleep } from 'k6'
 
+import Metrics from './lib/metrics.js';
 import { isOK, pageIsNotLogin } from './lib/checks.js'
 import { rand, validateSiteUrl, responseWasCached, bypassPageCacheCookies } from './lib/helpers.js'
 import Metrics from './lib/metrics.js'
 
 export const options = {
     throw: true,
+    summaryTimeUnit: 'ms',
     scenarios: {
         ramping: {
             executor: 'ramping-vus',
